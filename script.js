@@ -63,29 +63,44 @@ let mainList = {
 		}
 	},
 	chooseShopItems: function chooseShopItems() {
-		let items = prompt('Введите список товаров через запятую ', '').replace(/ /g, '');
-		mainList.shopItems = items.split(',');
-		mainList.shopItems.push(prompt('Подождите еще...', '').replace(/ /g, ''));
-		mainList.shopItems.sort();
-		console.log(mainList.shopItems);
-		for (var i = 0; i <= mainList.shopItems.length - 1; i++) {
-			if(!isNaN(mainList.shopItems[i]) || typeof(mainList.shopItems[i]) != 'string' || mainList.shopItems[i] == null || 
-				mainList.shopItems[i] == undefined || mainList.shopItems[i] == '') {
-				let noItems = mainList.shopItems.splice(i, 1);
-				console.log('Удалили элемент ' + i + ' : ' + noItems);
-				i--;
+		while(true) {
+			let items = prompt('Введите список товаров через запятую ', '').replace(/ /g, '');
+			if (items == null || items == '') {
+				continue;
 			} else {
-				for (var j = mainList.shopItems[i].length - 1; j >= 0; j--) {
-					if(!isNaN(mainList.shopItems[i].charAt(j))) {
-						mainList.shopItems[i] = mainList.shopItems[i].replace(/mainList.shopItems[i].charAt(j)/g, '');
-						console.log('Удалили элемент ' + j + ' : ' + mainList.shopItems[i].charAt(j));
-						j--;
+				mainList.shopItems = items.split(',');
+				mainList.shopItems.push(prompt('Подождите еще...', '').replace(/ /g, ''));
+
+				mainList.shopItems.sort();
+				console.log(mainList.shopItems);
+				for (var i = 0; i <= mainList.shopItems.length - 1; i++) {
+					if (!isNaN(mainList.shopItems[i]) || typeof(mainList.shopItems[i]) != 'string' || mainList.shopItems[i] == null || mainList.shopItems[i] == undefined || mainList.shopItems[i] == '') {
+						let noItems = mainList.shopItems.splice(i, 1);
+						console.log('Удалили элемент ' + i + ' : ' + noItems);
+						i--;
 					} else {
-						continue;
+						for (var j = mainList.shopItems[i].length - 1; j >= 0; j--) {
+							if (!isNaN(mainList.shopItems[i].charAt(j))) {
+								var newItems = mainList.shopItems[i].split('');
+								let sym = newItems.splice(j, 1);
+								mainList.shopItems[i] = newItems.join('');
+								console.log('Удалили элемент из слова ' + j + ' : ' + sym + ' > ' + mainList.shopItems[i]);
+								j--;
+								/*
+								noItems = mainList.shopItems.splice(i, 1);
+								console.log('Удалили элемент из слова ' + i + ' : ' + noItems);
+								*/
+							} else {
+								continue;
+							}
+						}
 					}
 				}
+				break;
 			}
 		}
+
+		
 	}
 };
 
@@ -94,5 +109,5 @@ let mainList = {
 window.onload = function() {
 	mainList.chooseShopItems();
 	console.log(mainList.shopItems);
-	console.log('яблоки, , апельсины, 247,,лимон, 228');
+	console.log('яблоки, , апельсины, 247,,ли5мон, 228');
 }
