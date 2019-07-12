@@ -69,7 +69,7 @@ let mainList = {
 				continue;
 			} else {
 				mainList.shopItems = items.split(',');
-				mainList.shopItems.push(prompt('Подождите еще...', '').replace(/ /g, ''));
+				/*mainList.shopItems.push(prompt('Подождите еще...', '').replace(/ /g, ''));*/
 
 				mainList.shopItems.sort();
 				console.log(mainList.shopItems);
@@ -89,6 +89,7 @@ let mainList = {
 								/*
 								noItems = mainList.shopItems.splice(i, 1);
 								console.log('Удалили элемент из слова ' + i + ' : ' + noItems);
+								яблоки, , апельсины, 247,,ли5мон, 228
 								*/
 							} else {
 								continue;
@@ -96,11 +97,16 @@ let mainList = {
 						}
 					}
 				}
+				mainList.shopItems.forEach(function(item, i, arr) {
+					alert('У нас вы можете купить: ' + (1+i) + " - " + item);
+				});
+				for (var obj in mainList) {
+					var cm = cm + obj + ', ';
+				}
+				console.log('Наш магазин включает в себя: ' + cm);
 				break;
 			}
 		}
-
-		
 	}
 };
 
@@ -109,5 +115,4 @@ let mainList = {
 window.onload = function() {
 	mainList.chooseShopItems();
 	console.log(mainList.shopItems);
-	console.log('яблоки, , апельсины, 247,,ли5мон, 228');
 }
